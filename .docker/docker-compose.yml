@@ -1,0 +1,99 @@
+version: '3.9'
+
+services:
+  php:
+    image: leseditionslunaires.fr/website/php-fpm:dev
+    configs:
+      - source: php_conf
+        target: /usr/local/etc/php/php.ini
+    volumes:
+      - ../:/var/www/les_editions_lunaires
+      - composer:/var/www/.composer
+    networks:
+      - app
+
+  nginx:
+    image: nginx
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=traefik_reverse_proxy"
+        - "traefik.docker.lbswarm=true"
+        - "traefik.http.services.leseditionslunaires-nginx.loadbalancer.server.port=80"
+        - "traefik.http.routers.leseditionslunaires-nginx.entryPoints=web"
+        - "traefik.http.routers.leseditionslunaires-nginx.rule=Host(`leseditionslunaires.docker`) || Host(`www.leseditionslunaires.docker`)"
+        - "traefik.http.routers.leseditionslunaires-nginx-https.entryPoints=websecure"
+        - "traefik.http.routers.leseditionslunaires-nginx-https.rule=Host(`leseditionslunaires.docker`) || Host(`www.leseditionslunaires.docker`)"
+        - "traefik.http.routers.leseditionslunaires-nginx-https.tls=true"
+        - "traefik.http.routers.leseditionslunaires-nginx-https.tls.certresolver=letsencrypt"
+    configs:
+      - source: nginx_conf
+        target: /etc/nginx/conf.d/default.conf
+    volumes:
+      - ../:/var/www/les_editions_lunaires
+    environment:
+      - NGINX_HOST=leseditionslunaires.docker
+    networks:
+      - app
+      - traefik_reverse_proxy
+
+  static:
+    image: nginx
+    volumes:
+      - ../:/var/www/les_editions_lunaires:ro
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik_reverse_proxy
+        - traefik.docker.lbswarm=true
+        - traefik.http.services.leseditionslunaires-static-nginx.loadbalancer.server.port=80
+        - traefik.http.routers.leseditionslunaires-static-nginx.entryPoints=web
+        - traefik.http.routers.leseditionslunaires-static-nginx.rule=Host(`leseditionslunaires.docker`) && PathPrefix(`/build/`,`/bundles/`,`/media/`,`/favicon.ico`) && Method(`GET`)
+        - traefik.http.routers.leseditionslunaires-static-nginx-https.entrypoints=websecure
+        - traefik.http.routers.leseditionslunaires-static-nginx-https.rule=Host(`leseditionslunaires.docker`) && PathPrefix(`/build/`,`/bundles/`,`/media/`,`/favicon.ico`) && Method(`GET`)
+        - traefik.http.routers.leseditionslunaires-static-nginx-https.tls=true
+        - traefik.http.routers.leseditionslunaires-static-nginx-https.tls.certresolver=letsencrypt
+    configs:
+      - source: static_config
+        target: /etc/nginx/conf.d/default.conf
+    networks:
+      - app
+      - traefik_reverse_proxy
+
+  adminer:
+    image: adminer:latest
+    deploy:
+      labels:
+        - traefik.enable=true
+        - traefik.docker.network=traefik_reverse_proxy
+        - traefik.docker.lbswarm=true
+        - traefik.http.services.leseditionslunaires-adminer.loadbalancer.server.port=8080
+        - traefik.http.routers.leseditionslunaires-adminer.entryPoints=web
+        - traefik.http.routers.leseditionslunaires-adminer.rule=Host(`adminer.leseditionslunaires.docker`)
+        - traefik.http.routers.leseditionslunaires-adminer-https.entrypoints=websecure
+        - traefik.http.routers.leseditionslunaires-adminer-https.rule=Host(`adminer.leseditionslunaires.docker`)
+        - traefik.http.routers.leseditionslunaires-adminer-https.tls.certresolver=letsencrypt
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - leseditionslunaires_postgres_public
+      - traefik_reverse_proxy
+
+
+configs:
+  nginx_conf:
+    file: ./conf/nginx/site.conf
+  php_conf:
+    file: ./conf/php/php.ini
+  static_config:
+    file: ./conf/nginx/static.conf
+
+volumes:
+  composer:
+
+networks:
+  app:
+  leseditionslunaires_postgres_public:
+  traefik_reverse_proxy:
+    external: true
