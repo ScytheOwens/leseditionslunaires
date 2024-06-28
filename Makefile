@@ -28,7 +28,7 @@ composer:
 # IMAGES
 .PHONY: build-image
 build-image:
-	docker build --build-arg source_tag=$(source_tag) --no-cache --network=host -t leseditionslunaires.fr/website/php-fpm:$(source_tag) -f .docker/Dockerfile .
+	docker build --build-arg source_tag=$(source_tag) --no-cache --network=host -t leseditionslunaires.fr/php-fpm:$(source_tag) -f .docker/Dockerfile .
 
 # STACKS
 .PHONY: stack-deploy
@@ -38,3 +38,8 @@ stack-deploy:
 .PHONY: stack-undeploy
 stack-undeploy:
 	docker stack rm ${stack_name}
+
+# ASSETS
+.PHONY: build-style
+build-style:
+	make console cmd="sass:build $(option)"

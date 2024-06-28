@@ -19,10 +19,12 @@ WORKDIR /var/www/les_editions_lunaires
 
 # Copy App files
 COPY composer.json composer.lock symfony.lock .env* ./
+COPY assets assets /
 COPY bin bin/
 COPY config config/
 COPY public public/
 COPY src src/
+COPY templates templates/
 
 ## Create empty var cache and var log directory
 RUN mkdir -p /var/www/les_editions_lunaires/var/cache /var/www/les_editions_lunaires/var/log
