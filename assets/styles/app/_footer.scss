@@ -1,0 +1,21 @@
+footer {
+    color: $color-lightblue;
+    padding: 1rem 2rem;
+
+    .footer-nav {
+        align-items: center;
+        column-gap: 2rem;
+        display: flex;
+
+        .footer-nav-item {
+            a {
+                display: block;
+
+                img {
+                    filter: invert(100%) sepia(74%) saturate(2231%) hue-rotate(178deg) brightness(110%) contrast(104%);
+                    height: 1.5rem;
+                }
+            }
+        }
+    }
+}

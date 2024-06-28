@@ -64,6 +64,10 @@ header {
                         justify-content: center;
                         top: -2.5rem;
                         width: 90%;
+
+                        img {
+                            filter: drop-shadow(2px 4px 6px $color-black);
+                        }
                     }
 
                     @media only screen and (max-device-width: $tablet) {
