@@ -1,0 +1,13 @@
+<header>
+    <nav class='header-nav'>
+        <label for='sandwich-menu' class='header-nav-label'>&equiv;<a href='{{ url('web_home_index') }}'>Les Editions Lunaires</a></label>
+        <input type='checkbox' id='sandwich-menu' class='header-nav-input'>
+        <ul class='header-nav-menu'>
+            <li class='header-nav-menu-item'><a href='#' title='Les romans à découvrir'>Romans</a></li>
+            <li class='header-nav-menu-item'><a href='#' title='Communiqués et apparitions'>Presse</a></li>
+            <li class='header-nav-menu-item' id='homepage'><a href='{{ url('web_home_index') }}' title={{ 'Page d\'accueil' }}><img src='{{ asset('images/logo/lune.png') }}' alt='Logo des Editions Lunaires'/></a></li>
+            <li class='header-nav-menu-item'><a href='#' title='Formulaire de contact'>Contact</a></li>
+            <li class='header-nav-menu-item'><a href='#' title='Votre panier'>Panier</a></li>
+        </ul>
+    </nav>
+</header>
