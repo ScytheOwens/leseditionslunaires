@@ -42,4 +42,4 @@ stack-undeploy:
 # ASSETS
 .PHONY: build-style
 build-style:
-	make console cmd="sass:build"
+	make console cmd="sass:build $(option)"

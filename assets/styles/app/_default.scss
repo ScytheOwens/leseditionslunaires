@@ -1,3 +1,8 @@
-html {
-    background-color: $color-dark-blue;
+body {
+    background-color: $color-darkblue;
+    font-family: Arial, Helvetica, sans-serif;
+
+    a {
+        color: $color-black;
+    }
 }
