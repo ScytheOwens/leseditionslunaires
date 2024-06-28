@@ -1,0 +1,13 @@
+.link {
+    &.link-secondary {
+        color: $color-lightblue;
+
+        &:hover {
+            color: $color-blue;
+
+            img {
+                filter: invert(72%) sepia(36%) saturate(526%) hue-rotate(170deg) brightness(101%) contrast(96%);
+            }
+        }
+    }
+}
