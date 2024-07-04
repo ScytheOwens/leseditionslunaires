@@ -11,6 +11,7 @@ services:
       - composer:/var/www/.composer
     networks:
       - app
+      - postgres
 
   nginx:
     image: nginx
@@ -77,8 +78,21 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
-      - leseditionslunaires_postgres_public
+      - postgres
       - traefik_reverse_proxy
+
+  database:
+    image: postgres:15-alpine
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+      - data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=leseditionslunaires
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=toor
+    networks:
+      - postgres
 
 
 configs:
@@ -91,9 +105,10 @@ configs:
 
 volumes:
   composer:
+  data:
 
 networks:
   app:
-  leseditionslunaires_postgres_public:
+  postgres:
   traefik_reverse_proxy:
     external: true
