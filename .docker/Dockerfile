@@ -5,7 +5,9 @@ FROM php:8.2-fpm AS base
 
 ## Install dependencies
 RUN apt update \
-	&& apt install -y git rsync zip libicu-dev \
+	&& apt install -y git rsync zip libpq-dev libicu-dev \
+	# Install pdo & pgsql
+    && docker-php-ext-install pdo pgsql pdo_pgsql \
 	# Install intl
 	&& docker-php-ext-configure intl \
 	&& docker-php-ext-install intl \
