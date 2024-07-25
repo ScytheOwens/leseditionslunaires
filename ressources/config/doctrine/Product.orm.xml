@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+    <entity name="App\Entity\Product" repository-class="src\Repository\ProductRepository" table="product">
+
+        <id name="id" type="uuid" column="id">
+            <generator strategy="CUSTOM"/>
+            <custom-id-generator class="Ramsey\Uuid\Doctrine\UuidGenerator"/>
+        </id>
+
+        <field name="name" type="string" length="255"/>
+        <field name="description" type="text"/>
+        <field name="slug" type="string" length="255"/>
+
+        <field name="createdAt" type="datetime" column="created_at" nullable="false" updatable="false"/>
+        <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
+
+        <many-to-one field="category" target-entity="App\Entity\Category" inversed-by="products">
+            <join-column name="category_id" referenced-column-name="id"/>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

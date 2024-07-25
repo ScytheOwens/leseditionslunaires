@@ -10,6 +10,8 @@ doctrine:
         use_savepoints: true
     orm:
         auto_generate_proxy_classes: true
+        controller_resolver:
+            auto_mapping: true
         enable_lazy_ghost_objects: true
         report_fields_where_declared: true
         validate_xml_mapping: true
@@ -17,9 +19,9 @@ doctrine:
         auto_mapping: true
         mappings:
             App:
-                type: attribute
+                type: xml
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
+                dir: '%kernel.project_dir%/ressources/config/doctrine'
                 prefix: 'App\Entity'
                 alias: App
 
