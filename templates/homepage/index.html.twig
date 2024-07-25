@@ -1,1 +1,23 @@
 {% extends 'layout.html.twig' %}
+
+{% block title %}Actualités, sorties{% endblock %}
+
+{% block meta %}
+    <meta name='title' content='{{ 'Les Editions Lunaires, l\'autoédition professionnelle.'|escape('html') }}'>
+    <meta name='description' content='{{ 'Les Editions Lunaires sont une maison d\'édition indépendante qui aspire à une autoédition de qualité professionnelle. Spécialisée littérature de l\'imaginaire ; si vous aimez les créatures surnaturelles ou les voyages spatiaux, vous nous avez trouvés.'|escape('html') }}'>
+{% endblock %}
+
+{% block main %}
+    {% include 'widget/_widget_header.html.twig' with {
+        'page_title': 'Nos actualités',
+        'page_description': 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsumlorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
+    } %}
+
+    {% include 'widget/_widget_display.html.twig' with {
+        'title': 'A la une'
+    } %}
+
+    {% include 'widget/_widget_display.html.twig' with {
+        'title': 'Les nouvelles'
+    } %}
+{% endblock %}

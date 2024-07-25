@@ -1,0 +1,12 @@
+.widget-header {
+    color: $color-lightblue;
+
+    .widget-header-title {
+        font-size: $font-size-xxlarge;
+    }
+
+    .widget-header-description {
+        font-size: $font-size-large;
+        padding: 1rem 1.5rem;
+    }
+}

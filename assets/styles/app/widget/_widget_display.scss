@@ -1,0 +1,11 @@
+.widget-display {
+    background-color: $color-lightblue;
+    border-radius: 1rem;
+    margin-top: 1.5rem;
+    padding: 1rem 2rem;
+    width: 80%;
+
+    &:nth-child(even of .widget-display) {
+        margin-left: auto;
+    }
+}
