@@ -25,6 +25,14 @@ console:
 composer:
 	docker exec -u www-data -it "$(php_container_id)" php -d memory_limit=-1 /usr/local/bin/composer $(cmd)
 
+.PHONY: composer-install
+composer-install:
+	docker exec -u www-data -it "$(php_container_id)" php -d memory_limit=-1 /usr/local/bin/composer install --no-interaction
+
+.PHONY: composer-update
+composer-update:
+	docker exec -u www-data -it "$(php_container_id)" php -d memory_limit=-1 /usr/local/bin/composer update $(cmd)
+
 # IMAGES
 .PHONY: build-image
 build-image:
