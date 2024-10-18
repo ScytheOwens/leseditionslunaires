@@ -30,6 +30,21 @@ class Product
     protected $slug;
 
     /**
+     * @var string|null
+     */
+    protected $media;
+
+    /**
+     * @var \DateTimeInterface|null
+     */
+    protected $releasedOn;
+
+    /**
+     * @var int|null
+     */
+    protected $version;
+
+    /**
      * @var \DateTimeInterface|null
      */
     protected $createdAt;
@@ -44,7 +59,7 @@ class Product
      */
     protected $category;
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -81,6 +96,42 @@ class Product
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getMedia(): ?string
+    {
+        return $this->media;
+    }
+
+    public function setMedia(?string $media): self
+    {
+        $this->media = $media;
+
+        return $this;
+    }
+
+    public function getReleasedOn(): ?string
+    {
+        return $this->releasedOn;
+    }
+
+    public function setReleasedOn(?string $releasedOn): self
+    {
+        $this->releasedOn = $releasedOn;
+
+        return $this;
+    }
+
+    public function getVersion(): ?int
+    {
+        return $this->version;
+    }
+
+    public function setVersion(?int $version): self
+    {
+        $this->version = $version;
 
         return $this;
     }

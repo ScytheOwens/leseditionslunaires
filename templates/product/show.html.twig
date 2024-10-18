@@ -1,0 +1,23 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block meta %}
+    <meta name="title" content="{{ product.name }}">
+    <meta name="description" content="{{ product.description }}">
+{% endblock %}
+
+{% block main %}
+    {% include "widget/_widget_header.html.twig" with {
+        'page_title': product.name
+    } %}
+
+    <article class="widget-presentation">
+        <img src="{{ product.media }}" alt="Couverture de {{ product.media }}" class="widget-presentation-media"/>
+        <section class="widget-presentation-content">
+            <h2 class="widget-presentation-title">{{ product.name }}</h2>
+            <p class="widget-presentation-text">{{ product.description }}</p>
+        </section>
+    </article>
+    {{ dump(product) }}
+{% endblock %}

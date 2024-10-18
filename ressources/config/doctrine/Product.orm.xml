@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
-    <entity name="App\Entity\Product" repository-class="src\Repository\ProductRepository" table="product">
+    <entity name="App\Entity\Product" repository-class="App\Repository\ProductRepository" table="product">
 
         <id name="id" type="uuid" column="id">
             <generator strategy="CUSTOM"/>
@@ -10,6 +10,10 @@
         <field name="name" type="string" length="255"/>
         <field name="description" type="text"/>
         <field name="slug" type="string" length="255"/>
+        <field name="media" type="string" length="255" nullable="true"/>
+        <field name="releasedOn" type="datetime" column="released_on" nullable="false"/>
+
+        <field name="version" type="string" length="255"/>
 
         <field name="createdAt" type="datetime" column="created_at" nullable="false" updatable="false"/>
         <field name="updatedAt" type="datetime" column="updated_at" nullable="true"/>
