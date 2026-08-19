@@ -1,5 +1,5 @@
 footer {
-    color: $color-lightblue;
+    color: $color-text-accent;
     padding: 1rem 2rem;
 
     .footer-nav {
@@ -8,7 +8,7 @@ footer {
         display: flex;
 
         @media only screen and (max-device-width: $tablet) {
-            font-size: $font-size-xxlarge;
+            font-size: $font-size-xl;
         }
 
         .footer-nav-item {

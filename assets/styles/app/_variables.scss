@@ -1,17 +1,36 @@
-$color-black: #000000;
-$color-blue: #87CEFA;
-$color-darkblue: #03224C;
-$color-grey: #808080;
+// Colors
+$color-black: #17202A;
+$color-moon: #87CEFA;
+$color-night: #03224C;
+$color-lightblue: #EAF4FB;
+$color-silver: #B8C4D0;
+$color-ivory: #F7F4ED;
 $color-lightblue: #F0F8FF;
 
-$font-size-medium: 1rem;
-$font-size-large: 1.1rem;
-$font-size-xlarge: 1.5rem;
-$font-size-xxlarge: 2rem;
-$font-size-xxxlarge: 4rem;
-$font-size-big: 6rem;
+// Colors use case
+$color-background-main: $color-night;
+$color-background-surface: $color-lightblue;
 
+$color-text-accent: $color-moon;
+$color-text-main: $color-black;
+$color-text-subtle: $color-silver;
+
+$color-border-accent: $color-moon;
+$color-border-main: $color-black;
+$color-border-subtle: $color-silver;
+
+// Font size
+$font-size-xs: 0.8rem;
+$font-size-s: 0.9rem;
+$font-size-m: 1rem;
+$font-size-l: 1.5rem;
+$font-size-xl: 2rem;
+
+// Font weight
+$font-weight-regular: 400;
 $font-weight-semibold: 600;
 
-$desktop: 1024px;
-$tablet: 768px;
+// Media queries
+$desktop: 1444;
+$tablet: 1023;
+$mobile: 768;
