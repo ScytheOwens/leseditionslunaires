@@ -2,67 +2,41 @@
 
 namespace App\Entity;
 
+use App\Entity\Category;
+use App\Entity\ProductVariant;
+use App\Entity\Trait\CoreTrait;
+use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Product
 {
-    use Traits\CreatableEntityTrait;
-    use Traits\UpdatableEntityTrait;
+    use CoreTrait;
 
-    /**
-     * @var string|null
-     */
-    protected $id;
+    #[ORM\Column]
+    #[Assert\NotBlank]
+    private ?string $name;
 
-    /**
-     * @var string|null
-     */
-    protected $name;
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank]
+    private ?string $description;
 
-    /**
-     * @var string|null
-     */
-    protected $description;
+    #[ORM\Column]
+    #[Assert\NotBlank]
+    private ?string $slug;
 
-    /**
-     * @var string|null
-     */
-    protected $slug;
+    #[ORM\Column]
+    #[Assert\NotBlank]
+    private ?\DateTimeInterface $releasedOn;
 
-    /**
-     * @var string|null
-     */
-    protected $media;
+    #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'product')]
+    private Collection $categories;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
-    protected $releasedOn;
-
-    /**
-     * @var int|null
-     */
-    protected $version;
-
-    /**
-     * @var \DateTimeInterface|null
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTimeInterface|null
-     */
-    protected $updatedAt;
-
-    /**
-     * @var Collection<Category>
-     */
-    protected $category;
-
-    public function getId(): ?string
-    {
-        return $this->id;
-    }
+    #[ORM\OneToMany(targetEntity: ProductVariant::class, mappedBy: 'product', cascade: ['persist', 'remove'])]
+    private Collection $productVariants;
 
     public function getName(): ?string
     {
@@ -100,51 +74,96 @@ class Product
         return $this;
     }
 
-    public function getMedia(): ?string
-    {
-        return $this->media;
-    }
-
-    public function setMedia(?string $media): self
-    {
-        $this->media = $media;
-
-        return $this;
-    }
-
-    public function getReleasedOn(): ?string
+    public function getReleasedOn(): ?\DateTimeInterface
     {
         return $this->releasedOn;
     }
 
-    public function setReleasedOn(?string $releasedOn): self
+    public function setReleasedOn(?\DateTimeInterface $releasedOn): self
     {
         $this->releasedOn = $releasedOn;
 
         return $this;
     }
 
-    public function getVersion(): ?int
-    {
-        return $this->version;
-    }
-
-    public function setVersion(?int $version): self
-    {
-        $this->version = $version;
-
-        return $this;
-    }
-
-    public function getCategory(): ?Category
+    public function getCategories(): Collection
     {
         return $this->category;
     }
 
-    public function setCategory(?Category $category): self
+    public function setCategories(array $categories): self
     {
-        $this->category = $category;
+        $this->categories = new ArrayCollection();
+
+        foreach($categories as $category) {
+            $this->addCategory($category);
+        }
 
         return $this;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+        }
+
+        return $this;
+    }
+
+    public function getProductVariants(): Collection
+    {
+        return $this->productVariant;
+    }
+
+    public function setProductVariants(array $productVariants): self
+    {
+        $this->productVariants = new ArrayCollection();
+
+        foreach($productVariants as $productVariant) {
+            $this->addProductVariant($productVariant);
+        }
+
+        return $this;
+    }
+
+    public function addProductVariant(ProductVariant $productVariant): self
+    {
+        if (!$this->productVariants->contains($productVariant)) {
+            $this->productVariants[] = $productVariant;
+            $productVariant->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductVariant(ProductVariant $productVariant): self
+    {
+        if ($this->productVariants->contains($productVariant)) {
+            $this->productVariants->removeElement($productVariant);
+        }
+
+        return $this;
+    }
+
+    public function getMainVariant(): ?ProductVariant
+    {
+        foreach ($this->productVariants as $productVariant) {
+            if ($productVariant->isMainVariant()) {
+                return $productVariant;
+            }
+        }
+
+        return null;
     }
 }

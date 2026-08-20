@@ -99,6 +99,7 @@ services:
         - traefik.http.routers.leseditionslunaires-adminer.rule=Host(`adminer.leseditionslunaires.docker`)
         - traefik.http.routers.leseditionslunaires-adminer-https.entrypoints=websecure
         - traefik.http.routers.leseditionslunaires-adminer-https.rule=Host(`adminer.leseditionslunaires.docker`)
+        - traefik.http.routers.leseditionslunaires-adminer-https.tls=true
     volumes:
       - /etc/localtime:/etc/localtime:ro
     networks:
@@ -131,6 +132,8 @@ services:
           # Web Interface
           - "traefik.http.routers.leseditionslunaires-minio.entryPoints=web"
           - "traefik.http.routers.leseditionslunaires-minio.rule=Host(`minio.leseditionslunaires.docker`)"
+          - "traefik.http.routers.leseditionslunaires-minio.service=leseditionslunaires-minio-svc"
+
           - "traefik.http.routers.leseditionslunaires-minio-https.entryPoints=websecure"
           - "traefik.http.routers.leseditionslunaires-minio-https.rule=Host(`minio.leseditionslunaires.docker`)"
           - "traefik.http.routers.leseditionslunaires-minio-https.tls=true"
