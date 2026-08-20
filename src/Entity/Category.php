@@ -18,13 +18,24 @@ class Category
     #[Assert\NotBlank]
     private ?string $name;
 
+    #[ORM\Column(unique: true)]
+    #[Assert\NotBlank]
+    private ?string $reference;
+
     #[ORM\Column(type: 'text')]
     #[Assert\NotBlank]
     private ?string $description;
 
-    #[ORM\Column]
+    #[ORM\Column(unique: true)]
     #[Assert\NotBlank]
     private ?string $slug;
+
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?Category $parent = null;
+
+    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent', cascade: ['persist', 'remove'])]
+    private Collection $children;
 
     #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category', cascade: ['persist'])]
     private Collection $products;
@@ -33,6 +44,7 @@ class Category
     {
         $this->initializeCoreProperties();
 
+        $this->children = new ArrayCollection();
         $this->products = new ArrayCollection();
     }
 
@@ -48,6 +60,18 @@ class Category
         return $this;
     }
 
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(?string $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -56,6 +80,65 @@ class Category
     public function setDescription($description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getParent(): ?Category
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?Category $category): self
+    {
+        $this->parent = $category;
+
+        return $this;
+    }
+
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function setChildren(array $children): self
+    {
+        $this->children = new ArrayCollection();
+
+        foreach ($children as $child) {
+            $this->addChild($child);
+        }
+
+        return $this;
+    }
+
+    public function addChild(Category $category): self
+    {
+        if (!$this->children->contains($category)) {
+            $this->children[] = $category;
+            $category->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild(Category $category): self
+    {
+        if ($this->children->contains($category)) {
+            $this->children->removeElement($category);
+        }
 
         return $this;
     }

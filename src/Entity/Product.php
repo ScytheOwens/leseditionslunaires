@@ -24,7 +24,7 @@ class Product
     #[Assert\NotBlank]
     private ?string $description;
 
-    #[ORM\Column]
+    #[ORM\Column(unique: true)]
     #[Assert\NotBlank]
     private ?string $slug;
 

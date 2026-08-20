@@ -16,7 +16,7 @@ class ProductVariant
 {
     use CoreTrait;
 
-    #[ORM\Column]
+    #[ORM\Column(unique: true)]
     #[Assert\NotBlank]
     private ?string $reference;
 

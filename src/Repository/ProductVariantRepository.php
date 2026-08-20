@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Repository;
+
 use App\Entity\ProductVariant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
