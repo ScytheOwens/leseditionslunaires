@@ -1,0 +1,112 @@
+[
+    {
+        "name": "Symbiose",
+        "description": "Qu’attendre de son existence ? Morgan le sait : monotonie et insipidité. Quel ennui, quelle non-vie ! Il la fuit, chérit la moindre braise de liberté, immergé dans l’amitié fusionnelle qu’il partage avec Lucian. Cependant, l’approche du baccalauréat menace de briser leur bulle. Si seulement un astéroïde, une tornade, n’importe quoi, pulvérisait cette échéance ; il regarderait ce monde brûler avec plaisir tant que son être pouvait vibrer. Mais si l’opportunité de devenir un dieu se présentait, la saisirait-il ? Accepterait-il tout ce que cette puissance impliquait de destruction, et surtout, de création ?",
+        "slug": "symbiose",
+        "categories": ["science-fiction", "light-sf"],
+        "releasedOn": "2022-05-02",
+        "variants": [
+            {
+                "reference": "9781659433",
+                "media": [
+                    {
+                        "name": "symbiose_cover",
+                        "link": "/images/cover/symbiose.jpg",
+                        "tag": "cover"
+                    }
+                ],
+                "rawPrice": 1801,
+                "taxRate": 5.5,
+                "weight": 485,
+                "height": 210,
+                "length": 149,
+                "width": 16,
+                "mainVariant": true
+            },
+            {
+                "reference": "9782958200114",
+                "media": [],
+                "rawPrice": 599,
+                "taxRate": 5.5
+            }
+        ]
+    },
+    {
+        "name": "L'étoile",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porttitor eleifend mollis. Donec enim orci, sollicitudin eu felis eget, dignissim egestas neque. Duis tristique felis posuere elit ultricies condimentum sit amet eget est. Aenean porttitor eros in venenatis condimentum. Morbi luctus commodo sodales. Aliquam cursus pretium purus, vel euismod justo. Nunc consectetur rhoncus ornare. Nulla sit amet placerat lectus. Aenean nec orci nulla. Quisque eleifend augue vitae libero rhoncus suscipit. Donec id lectus non ipsum maximus sodales. Ut laoreet nisi ac est porttitor, sed sagittis arcu laoreet. Quisque vel lorem ac magna consequat mattis ut quis elit. Maecenas id aliquam ipsum, at lacinia tortor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed aliquam accumsan risus id porta. Suspendisse imperdiet, ligula ultricies sagittis pretium, ante sem aliquam lorem, vel pellentesque tellus velit quis purus. Proin vestibulum dui arcu, non feugiat leo pharetra id. Nulla venenatis mollis mattis. Pellentesque hendrerit nisl ut imperdiet semper. Nunc fringilla ex diam, nec blandit elit consectetur sit amet. Integer sed dolor tempor nisi facilisis condimentum sit amet ut massa. Sed magna mi, volutpat eu maximus id, accumsan a mi. ",
+        "slug": "corps-celestes-l-etoile",
+        "reference": "9781659000",
+        "categories": ["fantastique", "dark-academia"],
+        "serie": "corps-celestes",
+        "releasedOn": "",
+        "variants": [
+            {
+                "reference": "978165943385",
+                "media": [
+                    {
+                        "name": "l_etoile_cover",
+                        "link": "https://placehold.co/140x190",
+                        "tag": "cover"
+                    }
+                ],
+                "rawPrice": 1422,
+                "taxRate": 5.5,
+                "weight": 250,
+                "height": 190,
+                "length": 140,
+                "width": 12
+            }
+        ]
+    },
+    {
+        "name": "Le trou noir",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porttitor eleifend mollis. Donec enim orci, sollicitudin eu felis eget, dignissim egestas neque. Duis tristique felis posuere elit ultricies condimentum sit amet eget est. Aenean porttitor eros in venenatis condimentum. Morbi luctus commodo sodales. Aliquam cursus pretium purus, vel euismod justo. Nunc consectetur rhoncus ornare. Nulla sit amet placerat lectus. Aenean nec orci nulla. Quisque eleifend augue vitae libero rhoncus suscipit. Donec id lectus non ipsum maximus sodales. Ut laoreet nisi ac est porttitor, sed sagittis arcu laoreet. Quisque vel lorem ac magna consequat mattis ut quis elit.",
+        "slug": "corps-celestes-le-trou-noir",
+        "categories": ["fantastique", "dark-academia"],
+        "serie": "corps-celestes",
+        "releasedOn": "",
+        "variants": [
+            {
+                "reference": "978165943388",
+                "media": [
+                    {
+                        "name": "le_trou_noir_cover",
+                        "link": "https://placehold.co/140x190",
+                        "tag": "cover"
+                    }
+                ],
+                "rawPrice": 1422,
+                "taxRate": 5.5,
+                "weight": 250,
+                "height": 190,
+                "length": 140,
+                "width": 12
+            }
+        ]
+    },
+    {
+        "name": "Artère de la Soie",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porttitor eleifend mollis. Donec enim orci, sollicitudin eu felis eget, dignissim egestas neque. Duis tristique felis posuere elit ultricies condimentum sit amet eget est. Aenean porttitor eros in venenatis condimentum. Morbi luctus commodo sodales. Aliquam cursus pretium purus, vel euismod justo. Nunc consectetur rhoncus ornare. Nulla sit amet placerat lectus. Aenean nec orci nulla. Quisque eleifend augue vitae libero rhoncus suscipit. Donec id lectus non ipsum maximus sodales. Ut laoreet nisi ac est porttitor, sed sagittis arcu laoreet. Quisque vel lorem ac magna consequat mattis ut quis elit. Maecenas id aliquam ipsum, at lacinia tortor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed aliquam accumsan risus id porta. Suspendisse imperdiet, ligula ultricies sagittis pretium, ante sem aliquam lorem, vel pellentesque tellus velit quis purus.",
+        "slug": "artere-de-la-soie",
+        "categories": ["fantastique", "horreur"],
+        "releasedOn": "2027-01-15",
+        "variants": [
+            {
+                "reference": "978165943875",
+                "media": [
+                    {
+                        "name": "artere_de_la_soie_cover",
+                        "link": "https://placehold.co/140x190",
+                        "tag": "cover"
+                    }
+                ],
+                "rawPrice": 15.17,
+                "taxRate": 5.5,
+                "weight": 300,
+                "height": 190,
+                "length": 140,
+                "width": 13
+            }
+        ]
+    }
+]
