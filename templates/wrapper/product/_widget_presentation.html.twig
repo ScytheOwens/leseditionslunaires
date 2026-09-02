@@ -1,0 +1,25 @@
+{% set details = [] %}
+{% set options = [] %}
+
+{% for category in product.categories %}
+    {% set details = details|merge([{
+        'name': category.name,
+        'link': ''
+    }]) %}
+{% endfor %}
+
+{% for variant in product.productVariants %}
+    {% set options = options|merge([{
+        'name': variant.name,
+        'link': '',
+        'price': (variant.computePrice * 0.01)|format_currency('EUR', {}, 'fr')
+    }]) %}
+{% endfor %}
+
+{% include "widget/_widget_presentation.html.twig" with {
+    'title': product.name,
+    'medium': guess_medium(product.mainVariant.media, 'cover').url,
+    'details': details,
+    'options': options,
+    'description': product.description
+} %}

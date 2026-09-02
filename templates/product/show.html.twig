@@ -8,16 +8,11 @@
 {% endblock %}
 
 {% block main %}
-    {% include "widget/_widget_header.html.twig" with {
-        'page_title': product.name
+    {% include "wrapper/product/_widget_presentation.html.twig" with {
+        'product': product
     } %}
 
-    <article class="widget-presentation">
-        <img src="{{ product.media }}" alt="Couverture de {{ product.media }}" class="widget-presentation-media"/>
-        <section class="widget-presentation-content">
-            <h2 class="widget-presentation-title">{{ product.name }}</h2>
-            <p class="widget-presentation-text">{{ product.description }}</p>
-        </section>
-    </article>
-    {{ dump(product) }}
+    {# {% include "widget/_widget_tabs.html.twig" with {
+        'tabs': tabs
+    } %} #}
 {% endblock %}

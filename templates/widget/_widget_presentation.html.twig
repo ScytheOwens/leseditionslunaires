@@ -1,0 +1,17 @@
+<article class="widget-presentation">
+    <img src="{{ medium }}" alt="Couverture de {{ title }}" class="widget-presentation-medium"/>
+    <section class="widget-presentation-content">
+        <h1 class="widget-presentation-title">{{ title }}</h1>
+        <ul class="widget-presentation-details">
+            {% for detail in details %}
+                <li class="widget-presentation-details-item"><a href="{{ detail.link }}" class="link link-highlight">{{ detail.name }}</a></li>
+            {% endfor %}
+        </ul>
+        <ul class="widget-presentation-options">
+            {% for option in options %}
+                <li class="widget-presentation-options-item"><a href="{{ option.link }}" class="button button-highlight"><span>{{ option.name }}</span><span>{{ option.price }}</span></a>
+            {% endfor %}
+        </ul>
+        <p class="widget-presentation-text">{{ description }}</p>
+    </section>
+</article>

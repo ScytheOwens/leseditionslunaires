@@ -1,0 +1,8 @@
+<table class="tab-details">
+    {% for detail in details %}
+        <tr class="tab-details-row">
+            <th class="tab-details-label">{{ detail.label }}</th>
+            <td class="tab-details-content">{{ detail.content }}</td>
+        </tr>
+    {% endfor %}
+</table>

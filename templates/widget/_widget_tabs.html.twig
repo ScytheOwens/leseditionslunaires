@@ -1,0 +1,15 @@
+<section class="widget-tabs">
+    <nav class="widget-tabs-nav">
+        {% for tab in tabs %}
+            <label for="tab-{{ tab.label|slug }}" class="widget-tabs-nav-label">{{ tab.label }}</label>
+        {% endfor %}
+    </nav>
+    <div class="widget-tabs-content">
+        {% for tab in tabs %}
+            <input type="radio" name="book-tabs" id="tab-{{ tab.label|slug }}" class="widget-tabs-content-input"{% if loop.index is same as (1) %}checked{% endif %}/>
+            <section class="widget-tabs-content-tab" id="content-{{ tab.label|slug }}">
+                {{ tab.content|raw }}
+            </section>
+        {% endfor %}
+    </div>
+</section>

@@ -20,6 +20,10 @@ class ProductController extends AbstractController
     {
         $product = $this->em->getRepository(Product::class)->findOneBy(['slug' => $slug]);
 
+        if (null === $product) {
+            throw $this->createNotFoundException('Ce livre n\'existe pas.');
+        }
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
         ]);
