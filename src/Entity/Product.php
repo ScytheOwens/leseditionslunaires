@@ -28,9 +28,9 @@ class Product
     #[Assert\NotBlank]
     private ?string $slug;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     #[Assert\NotBlank]
-    private ?\DateTimeInterface $releasedOn;
+    private ?\DateTimeImmutable $releasedOn;
 
     #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'product')]
     private Collection $categories;
@@ -74,12 +74,12 @@ class Product
         return $this;
     }
 
-    public function getReleasedOn(): ?\DateTimeInterface
+    public function getReleasedOn(): ?\DateTimeImmutable
     {
         return $this->releasedOn;
     }
 
-    public function setReleasedOn(?\DateTimeInterface $releasedOn): self
+    public function setReleasedOn(?\DateTimeImmutable $releasedOn): self
     {
         $this->releasedOn = $releasedOn;
 
@@ -141,7 +141,7 @@ class Product
     {
         if (!$this->productVariants->contains($productVariant)) {
             $this->productVariants[] = $productVariant;
-            $productVariant->addProduct($this);
+            $productVariant->setProduct($this);
         }
 
         return $this;

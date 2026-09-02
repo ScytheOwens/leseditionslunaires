@@ -7,7 +7,7 @@ flysystem:
                 client: 'minio.client'
                 bucket: '%env(MINIO_BUCKET_COVERS)%'
 
-        manuscripts.storage:
+        ebooks.storage:
             adapter: 'aws'
             options:
                 client: 'minio.client'

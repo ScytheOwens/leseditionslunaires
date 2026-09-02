@@ -26,16 +26,16 @@ class ProductVariant
     #[ORM\Column]
     private ?float $taxRate;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $length;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $width;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $height;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $weight;
 
     #[ORM\Column]
@@ -45,7 +45,7 @@ class ProductVariant
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $product;
 
-    #[ORM\OneToMany(targetEntity: Medium::class, mappedBy: 'productVariant')]
+    #[ORM\OneToMany(targetEntity: Medium::class, mappedBy: 'productVariant', cascade: ['persist', 'remove'])]
     private Collection $media;
 
     public function __construct()
@@ -127,6 +127,18 @@ class ProductVariant
         return $this;
     }
 
+    public function getWeight(): ?int
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(?int $weight): self
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
     public function isMainVariant(): bool
     {
         return $this->mainVariant;
@@ -171,7 +183,6 @@ class ProductVariant
     {
         if (!$this->media->contains($medium)) {
             $this->media[] = $medium;
-            $medium->setProductVariant($this);
         }
 
         return $this;
