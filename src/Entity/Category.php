@@ -37,7 +37,7 @@ class Category
     #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent', cascade: ['persist', 'remove'])]
     private Collection $children;
 
-    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category', cascade: ['persist'])]
+    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'categories', cascade: ['persist'])]
     private Collection $products;
 
     public function __construct()

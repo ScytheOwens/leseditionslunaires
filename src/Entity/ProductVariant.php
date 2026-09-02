@@ -41,7 +41,7 @@ class ProductVariant
     #[ORM\Column]
     private bool $mainVariant = false;
 
-    #[ORM\ManyToOne(targetEntity: Product::class)]
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'productVariants')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Product $product;
 
@@ -183,6 +183,7 @@ class ProductVariant
     {
         if (!$this->media->contains($medium)) {
             $this->media[] = $medium;
+            $medium->setProductVariant($this);
         }
 
         return $this;

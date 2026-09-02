@@ -32,7 +32,7 @@ class Product
     #[Assert\NotBlank]
     private ?\DateTimeImmutable $releasedOn;
 
-    #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'product')]
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
     private Collection $categories;
 
     #[ORM\OneToMany(targetEntity: ProductVariant::class, mappedBy: 'product', cascade: ['persist', 'remove'])]
@@ -123,7 +123,7 @@ class Product
 
     public function getProductVariants(): Collection
     {
-        return $this->productVariant;
+        return $this->productVariants;
     }
 
     public function setProductVariants(array $productVariants): self

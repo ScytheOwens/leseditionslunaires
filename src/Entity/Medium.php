@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\ProductVariant;
 use App\Entity\Trait\CoreTrait;
 use App\Repository\MediumRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -36,6 +37,10 @@ class Medium
     #[ORM\Column]
     #[Assert\NotBlank]
     private ?string $tag;
+
+    #[ORM\ManyToOne(targetEntity: ProductVariant::class, inversedBy: 'media')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?ProductVariant $productVariant;
 
     public function __construct()
     {
@@ -98,6 +103,18 @@ class Medium
     public function setTag(?string $tag): self
     {
         $this->tag = $tag;
+
+        return $this;
+    }
+
+    public function getProductVariant(): ?ProductVariant
+    {
+        return $this->productVariant();
+    }
+
+    public function setProductVariant(?ProductVariant $productVariant): self
+    {
+        $this->productVariant = $productVariant;
 
         return $this;
     }
