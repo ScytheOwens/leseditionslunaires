@@ -88,7 +88,7 @@ class Product
 
     public function getCategories(): Collection
     {
-        return $this->category;
+        return $this->categories;
     }
 
     public function setCategories(array $categories): self

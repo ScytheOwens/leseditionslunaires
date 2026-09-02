@@ -16,6 +16,10 @@ class ProductVariant
 {
     use CoreTrait;
 
+    #[ORM\Column]
+    #[Assert\NotBlank]
+    private ?string $name;
+
     #[ORM\Column(unique: true)]
     #[Assert\NotBlank]
     private ?string $reference;
@@ -53,6 +57,18 @@ class ProductVariant
         $this->initializeCoreProperties();
 
         $this->media = new ArrayCollection();
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
     }
 
     public function getReference(): ?string

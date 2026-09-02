@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Entity\Category;
 use App\Entity\Medium;
 use App\Entity\Product;
 use App\Entity\ProductVariant;
@@ -52,14 +53,13 @@ class ImportJsonProductsCommand
         $io->progressStart();
 
         foreach ($products as $product) {
-            $productVariants = $this->buildProductVariants($product);
-
             $product = (new Product())
                 ->setName($product['name'])
                 ->setDescription($product['description'])
                 ->setSlug($product['slug'])
                 ->setReleasedOn(new \DateTimeImmutable($product['releasedOn']))
-                ->setProductVariants($productVariants)
+                ->setCategories($this->getCategories($product))
+                ->setProductVariants($this->buildProductVariants($product))
             ;
 
             $this->em->persist($product);
@@ -73,12 +73,18 @@ class ImportJsonProductsCommand
         return Command::SUCCESS;
     }
 
+    private function getCategories(array $product): array
+    {
+        return $this->em->getRepository(Category::class)->findBySlugs($product['categories']);
+    }
+
     private function buildProductVariants(array $product): array
     {
         $variants = [];
 
         foreach ($product['variants'] as $variant) {
             $variants[] = (new ProductVariant())
+                ->setName($variant['name'])
                 ->setReference($variant['reference'])
                 ->setRawPrice($variant['rawPrice'])
                 ->setTaxRate($variant['taxRate'])
