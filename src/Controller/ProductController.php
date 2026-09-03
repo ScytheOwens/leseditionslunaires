@@ -15,6 +15,16 @@ class ProductController extends AbstractController
     {
     }
 
+    #[Route('/catalogue', name: 'list')]
+    public function list(): Response
+    {
+        $products = $this->em->getRepository(Product::class)->findAll();
+
+        return $this->render('product/list.html.twig', [
+            'products' => $products,
+        ]);
+    }
+
     #[Route('/catalogue/{slug}', name: 'show')]
     public function show(string $slug): Response
     {

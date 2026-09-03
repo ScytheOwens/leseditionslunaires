@@ -1,0 +1,14 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Catalogue{% endblock %}
+
+{% block meta %}
+    <meta name="title" content="Catalogue">
+    <meta name="description" content="Découvrez le catalogue des Editions Lunaires, spécialisée dans les genres de l'imaginaire tels que la fantasy, le fantastique et la science-fiction.">
+{% endblock %}
+
+{% block main %}
+    <pre>
+        {{ dump(products) }}
+    </pre>
+{% endblock %}
