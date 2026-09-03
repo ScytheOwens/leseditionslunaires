@@ -1,0 +1,135 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}CGV{% endblock %}
+
+{% block meta %}
+    <meta name="title" content="Conditions générales de vente">
+    <meta name="description" content="Consultez les conditions générales de ventes applicables aux transactions effectuées sur le site leseditionslunaires.fr.">
+{% endblock %}
+
+{% block main %}
+    {% include "widget/_widget_header.html.twig" with {
+        'page_title': 'Conditions Générales de Vente'
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': 'Article 1 : Principes Généraux',
+        'content': [
+            {
+                'title': '1. Objet',
+                'content': 'Les présentes conditions générales de vente (dites CGV) s\'appliquent à toute vente effectuée <i>via</i> https://leseditionslunaires.fr entre :<br/><br/>Maëva GRONDIN (dite le vendeur)<br/>9 rue Centrale - 69720 Saint Laurent de Mure - France<br/>contact@leseditionslunaires.fr<br/>07 50 43 99 45<br/><br/>et<br/><br/>le client-internaute (dit le client).'
+            },
+            {
+                'title': '2. Mentions Légales',
+                'content': 'Le site est édité par GRONDIN Maëva<br/>9 rue Centrale - 69720 Saint Laurent de Mure - France<br/>contact@leseditionslunaires.fr<br/>07 50 43 99 45<br/><br/>Le site est hébergé par SAS OVH<br/>2 rue Kellermann - 59100 Roubaix - France<br/>'
+            },
+            {
+                'title': '3. Acceptation des CGV',
+                'content': 'Passer commande implique l\'acceptation des présentes conditions. Le client se doit d\'en prendre connaissance et de le notifier en cochant la case de validation avant de pouvoir finaliser sa commande. Ainsi le client déclare avoir lu les CGV et les accepter.'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': 'Article 2 : Périmètre de l\'offre de vente',
+        'content': [
+            {
+                'content': 'L\'offre de vente sur le site est exclusivement réservé aux personnes physiques disposant de leur capacité à contracter et hors cadre professionnel.<br/>Le service de livraison n\'est assuré qu\'en France métropolitaine.<br/>Passer commande signifie que le client déclare respecter toutes les conditions susmentionnées.'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': 'Article 3 : Les produits',
+        'content': [
+            {
+                'title': '1. Description des caractéristiques',
+                'content': 'Conformément à l\'article L111-1 du code de la consommation, le client peut prendre connaissance de toutes les caractéristiques d\'un produit qu\'il souhaite commander.<br/>Les produits vendus par le site disposent tous d\'un texte descriptif, d\'une photo et d\'un prix TCC en euros.<br/>Si le client désire plus de précisions, il peut contacter le service client <i>via</i> le<a href="/" class="link link-secondary" title="Formulaire de contact">formulaire de contact</a>.'
+            },
+            {
+                'title': '2. Cas des livres numériques',
+                'content': 'Le téléchargement des contenus numériques est limité au territoire français.<br/>Avant validation de son achat, le client se doit de s\'assurer la compatibilité entre son support de téléchargement et le format du livre numérique.<br/>Les livres numériques sont soumis au code de la propriété intellectuelle, le client s\'engage donc à limiter son usage à sa seule personne. Tout contrevenant s\'expose à des poursuites judiciaires, civiles ou pénales.'
+            },
+            {
+                'title': '3. Prix des produits',
+                'content': 'Les livres, papier ou numérique, sont vendus dans le respect de la loi Lang 81-766 du 10/08/1981.<br/>Les prix affichés sont en euros, et ne comprennent pas les frais de port.'
+            },
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': 'Article 4 : Procédure de commande',
+        'content': [
+            {
+                'content': 'Le client sélectionne les produits et quantités souhaitées avant de valider son panier.<br/>Le client renseigne ses coordonnées.<br/>Le client choisit son mode de règlement parmi ceux proposés sur le site puis procède au paiement du prix.<br/>Le client reçoit un courriel de confirmation attestant de la prise en compte de sa commande, contenant un récapitulatif ainsi que les conditions de remboursement.'
+            },
+            {
+                'content': 'Le vendeur se réserve le droit de ne pas donner suite à la commande du client selon les motifs légitimes détaillés par l\'article L121-11 du code de la consommation.<br/>Le vendeur s\'engage à tenir ses stocks à jour et à informer le client des ruptures avant toute commande.'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': 'Article 5 : Le paiement',
+        'content': [
+            {
+                'content': 'Le client peut opter parmi les mode de règlement suivant :<ul><li>Carte bancaire</li><li>Paypal selon les conditions d\'utilisation de Paypal</li></ul>'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': 'Article 6 : Propriété et risques',
+        'content': [
+            {
+                'content': 'Les produits restent propriété du vendeur jusqu\'à réception du règlement.'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': 'Article 7 : Livraison',
+        'content': [
+            {
+                'title': 'Conditions de livraison',
+                'content': 'Les livraisons sont assurées par Collissimo, dans un délai moyen de 2 jours ouvrés, à l\'adresse de livraison renseignée par le client.<br/>En cas de retard, le client peut annuler sa commande <i>via</i> recommandé avec accusé de réception si le produit n\'a toujours pas été livré malgré le délai raisonnable enjoint par les mêmes modalités.<br/><br/>Le client peut suivre l\'expédition de son colis grâce au numéro de traçabilité fourni par Colissimo.<br/>Le remboursement sera effectué dans un délai de 8 jours selon les mêmes modalités que le paiement.'
+            },
+            {
+                'title': 'Frais de livraison',
+                'content': 'Les éditions Lunaires supportent une part des frais de port, mais dans le cadre de la loi Lang, interdisant la gratuité de la livraison, nous vous facturerons au minimum 1€ de frais de port.'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': 'Article 8 : Droit de rétractation',
+        'content': [
+            {
+                'content': 'Le client dispose de 14 jours à compter de la réception du produit pour faire valoir son droit de rétractation. Pour cela, il lui suffit d\'adresser sa volonté <i>via</i> le <a href="/" class="link link-secondary" title="formulaire de contact"> formulaire de contact </a>.<br/>Les frais de retour sont à la charge du client. Le remboursement surviendra au maximum 8 jours après retour de la marchandise au 9 rue Centrale, 69720, St Laurent de Mure, France ; selon les mêmes modalités que le paiement et à condition que la marchandise soit toujours emballée.<br/><br/>Ce droit ne s\'applique pas dans le cas d\'un livre numérique.'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': 'Article 9 : Garanties légales',
+        'content': [
+            {
+                'title': 'Garantie de conformité',
+                'content': 'Conformément à l\'article L.217-10 du Code de la Consommation la résolution de la vente ne peut toutefois être prononcée si le défaut de conformité est mineur. L\'action résultant du défaut de conformité se prescrit par deux ans à compter de la délivrance du bien (article L217-12 du Code de la Consommation).<br/>Lorsque l\'Acheteur agit en garantie légale de conformité, il :<br/>bénéficie d\'un délai de deux (2) ans à compter de la délivrance du Produit pour agir à l\'encontre du vendeur peut choisir entre la réparation ou le remplacement du Produit, sous réserve des conditions de coût prévues par l\'article L. 217-9 du Code de la Consommation est dispensé de rapporter la preuve de l\'existence du défaut de conformité du Produit durant les six (6) mois suivant la délivrance du Produit. Ce délai est porté à vingt-quatre (24) mois à compter du 18 mars 2016, sauf pour les biens d\'occasion.'
+            },
+            {
+                'title': 'Garantie contre les vices cachés',
+                'content': 'Article L217-4 du Code de la Consommation : « Le vendeur livre un bien conforme au contrat et répond des défauts de conformité existant lors de la délivrance. Il répond également des défauts de conformité résultant de l\'emballage, des instructions de montage ou de l\'installation lorsque celle-ci a été mise à sa charge par le contrat ou a été réalise sous sa responsabilité. »<br/>Article L217-5 du Code de la Consommation : Le bien est conforme au contrat :<br/>1- S\'il est propre à l\'usage habituellement attendu d\'un bien semblable et, le cas échéant :<br/>- s\'il correspond à la description donnée par le vendeur et possède les qualités que celui-ci a présentées à l\'acheteur sous forme d\'échantillon ou de modèle ;<br/>- s\'il présente les qualités qu\'un acheteur peut légitimement attendre eu égard aux déclarations publiques faites par le vendeur, par le producteur ou par son représentant, notamment dans la publicité ou l\'étiquetage ;<br/>2- Ou s\'il présente les caractéristiques définies d\'un commun accord par les parties ou est propre à tout usage spécial recherché par l\'acheteur, porté à la connaissance du vendeur et que ce dernier a accepté.<br/>Article L217-9 du Code de la Consommation : « En cas de défaut de conformité, l\'acheteur choisit entre la réparation et le remplacement du bien. Toutefois, le vendeur peut ne pas procéder à la réparation si ce choix entraîne un coût manifestement disproportionné au regard de l\'autre modalité, compte tenu de la valeur du bien ou de l\'importance du défaut. Il est alors tenu de procéder, sauf impossibilité, selon la modalité non choisie par l\'acheteur.»<br/>Article L217-12 du Code de la Consommation : « L\'action résultant du défaut de conformité se prescrit par deux ans à compter de la délivrance du bien. »<br/>Article L217-16 du Code de la Consommation : « Lorsque l\'acheteur demande au vendeur, pendant le cours de la garantie commerciale qui lui a été consentie lors de l\'acquisition ou de la réparation d\'un bien meuble, une remise en état couverte par la garantie, toute période d\'immobilisation d\'au moins 7 jours vient s\'ajouter à la durée de la garantie qui restait à courir. Cette période court à compter de la demande d\'intervention de l\'acheteur ou de la mise à disposition pour réparation du bien en cause, si cette mise à disposition est postérieure à la demande d\'intervention. »<br/>Article 1641 du Code Civil : « Le vendeur est tenu de la garantie à raison des défauts cachés de la chose vendue qui la rendent impropre à l\'usage auquel on la destine, ou qui diminuent tellement cet usage, que l\'acheteur ne l\'aurait pas acquise, ou n\'en aurait donné qu\'un moindre prix, s\'il les avait connus.»<br/>Article 1648 alinéa 1 du Code Civil : « L\'action résultant des vices rédhibitoires doit être intentée par l\'acquéreur dans un délai de deux ans à compter de la découverte du vice. »'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': 'Article 10 : Service client',
+        'content': [
+            {
+                'content': 'Pour la moindre question, n\'hésitez pas à nous contacter <i>via</i> le <a href="/" class="link link-secondary" title="le formulaire de contact">formulaire de contact</a>.'
+            }
+        ]
+    } %}
+{% endblock %}
