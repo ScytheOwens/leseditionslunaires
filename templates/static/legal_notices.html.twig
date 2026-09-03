@@ -1,0 +1,59 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}CGV{% endblock %}
+
+{% block meta %}
+    <meta name="title" content="Mentions légales">
+    <meta name="description" content="Consultez les mentions légales concernant le site leseditionslunaires.fr.">
+{% endblock %}
+
+{% block main %}
+    {% include "widget/_widget_header.html.twig" with {
+        'page_title': 'Mentions légales'
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': '1/ L\'éditeur',
+        'content': [
+            {
+                'content': 'GRONDIN Maëva <br/>9 rue Centrale - 69720 Saint Laurent de Mure - France <br/>contact@leseditionslunaires.fr <br/>07 50 43 99 45'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': '2/ L\'hébergeur',
+        'content': [
+            {
+                'content': 'Ce site est hébergé par SAS OVH <br/>2 rue Kellermann - 59100 Roubaix - France'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': '3/ L\'activité',
+        'content': [
+            {
+                'content': 'Les éditions Lunaires sont enregistrées au RCS LYON sous le numéro 909 494 023 <br/>NIF : 909 494 023<br/><a href="' ~ url('app_static_show', {'slug': 'cgv'}) ~ '" class="link link-secondary" title="Accédez aux CGV">Conditions Générales de Vente</a>'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': '4/ L\'utilisation des cookies',
+        'content': [
+            {
+                'content': 'Ce site n\'utilise pas de cookies.'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': '5/ L\'utilisation des données personnelles',
+        'content': [
+            {
+                'content': 'Ce site utilise vos données personnelles uniquement dans le cadre de la transaction commerciale lors de votre achat, à savoir les informations destinées à la facturation (nom, prénom, coordonnées, liste des articles ajoutés au panier...).'
+            }
+        ]
+    } %}
+{% endblock %}

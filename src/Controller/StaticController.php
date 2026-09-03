@@ -11,6 +11,7 @@ class StaticController extends AbstractController
 {
     public const STATIC_PAGE_SLUG_TEMPLATE_MAPPING = [
         'cgv' => 'general_terms',
+        'mentions-legales' => 'legal_notices',
     ];
 
     #[Route('/{slug}', name: 'show')]
