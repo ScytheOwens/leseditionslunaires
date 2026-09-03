@@ -1,0 +1,44 @@
+.widget-tabs {
+    margin-top: 3rem;
+
+    .widget-tabs-nav {
+        border-bottom: 1px solid $color-border-subtle;
+        display: flex;
+
+        .widget-tabs-nav-label {
+            color: $color-text-subtle;
+            cursor: pointer;
+            display: block;
+            font-family: $font-primary;
+            font-size: $font-size-s;
+            padding: 0.5rem 1rem;
+
+            &:hover {
+                color: $color-text-accent;
+            }
+        }
+    }
+
+    .widget-tabs-content {
+        padding: 1rem;
+
+        .widget-tabs-content-input {
+            display: none;
+
+            &:checked {
+                + .widget-tabs-content-tab {
+                    display: block;
+                }
+            }
+        }
+
+        .widget-tabs-content-tab {
+            display: none;
+            color: $color-text-subtle;
+
+            .tab-text {
+                line-height: 1.6;
+            }
+        }
+    }
+}

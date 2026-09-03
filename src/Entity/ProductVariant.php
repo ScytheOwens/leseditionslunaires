@@ -214,7 +214,7 @@ class ProductVariant
         return $this;
     }
 
-    public function computePrice(): int
+    public function computePrice(): float
     {
         if (empty($this->rawPrice)) {
             return 0;
