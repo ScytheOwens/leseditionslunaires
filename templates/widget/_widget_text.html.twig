@@ -1,0 +1,10 @@
+<section class="widget-text">
+    <h2 class="widget-text-title">{{ title }}</h2>
+
+    {% for item in content %}
+        {% if item.title|default is not empty %}
+            <h3 class="widget-text-subtitle">{{ item.title }}</h3>
+        {% endif %}
+        <p class="widget-text-paragraph">{{ item.content|raw }}</p>
+    {% endfor %}
+</section>
