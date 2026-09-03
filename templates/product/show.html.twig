@@ -1,0 +1,18 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block meta %}
+    <meta name="title" content="{{ product.name }}">
+    <meta name="description" content="{{ product.description }}">
+{% endblock %}
+
+{% block main %}
+    {% include "wrapper/product/_widget_presentation.html.twig" with {
+        'product': product
+    } %}
+
+    {% include "widget/_widget_tabs.html.twig" with {
+        'tabs': tabs
+    } %}
+{% endblock %}

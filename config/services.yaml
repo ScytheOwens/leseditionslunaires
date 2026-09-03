@@ -20,5 +20,11 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    # Command
+    App\Command\ImportJsonProductsCommand:
+        arguments:
+            $coverBucket: '%env(string:MINIO_BUCKET_COVERS)%'
+            $minioHost: '%env(string:MINIO_HOST)%'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

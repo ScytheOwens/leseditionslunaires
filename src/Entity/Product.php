@@ -2,52 +2,41 @@
 
 namespace App\Entity;
 
+use App\Entity\Category;
+use App\Entity\ProductVariant;
+use App\Entity\Trait\CoreTrait;
+use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Product
 {
-    use Traits\CreatableEntityTrait;
-    use Traits\UpdatableEntityTrait;
+    use CoreTrait;
 
-    /**
-     * @var string|null
-     */
-    protected $id;
+    #[ORM\Column]
+    #[Assert\NotBlank]
+    private ?string $name;
 
-    /**
-     * @var string|null
-     */
-    protected $name;
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank]
+    private ?string $description;
 
-    /**
-     * @var string|null
-     */
-    protected $description;
+    #[ORM\Column(unique: true)]
+    #[Assert\NotBlank]
+    private ?string $slug;
 
-    /**
-     * @var string|null
-     */
-    protected $slug;
+    #[ORM\Column(nullable: true)]
+    #[Assert\NotBlank]
+    private ?\DateTimeImmutable $releasedOn;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
-    protected $createdAt;
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
+    private Collection $categories;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
-    protected $updatedAt;
-
-    /**
-     * @var Collection<Category>
-     */
-    protected $category;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    #[ORM\OneToMany(targetEntity: ProductVariant::class, mappedBy: 'product', cascade: ['persist', 'remove'])]
+    private Collection $productVariants;
 
     public function getName(): ?string
     {
@@ -85,15 +74,96 @@ class Product
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getReleasedOn(): ?\DateTimeImmutable
     {
-        return $this->category;
+        return $this->releasedOn;
     }
 
-    public function setCategory(?Category $category): self
+    public function setReleasedOn(?\DateTimeImmutable $releasedOn): self
     {
-        $this->category = $category;
+        $this->releasedOn = $releasedOn;
 
         return $this;
+    }
+
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function setCategories(array $categories): self
+    {
+        $this->categories = new ArrayCollection();
+
+        foreach($categories as $category) {
+            $this->addCategory($category);
+        }
+
+        return $this;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+        }
+
+        return $this;
+    }
+
+    public function getProductVariants(): Collection
+    {
+        return $this->productVariants;
+    }
+
+    public function setProductVariants(array $productVariants): self
+    {
+        $this->productVariants = new ArrayCollection();
+
+        foreach($productVariants as $productVariant) {
+            $this->addProductVariant($productVariant);
+        }
+
+        return $this;
+    }
+
+    public function addProductVariant(ProductVariant $productVariant): self
+    {
+        if (!$this->productVariants->contains($productVariant)) {
+            $this->productVariants[] = $productVariant;
+            $productVariant->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductVariant(ProductVariant $productVariant): self
+    {
+        if ($this->productVariants->contains($productVariant)) {
+            $this->productVariants->removeElement($productVariant);
+        }
+
+        return $this;
+    }
+
+    public function getMainVariant(): ?ProductVariant
+    {
+        foreach ($this->productVariants as $productVariant) {
+            if ($productVariant->isMainVariant()) {
+                return $productVariant;
+            }
+        }
+
+        return null;
     }
 }

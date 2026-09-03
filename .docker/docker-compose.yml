@@ -11,22 +11,23 @@ services:
       - composer:/var/www/.composer
     networks:
       - app
+      - minio
       - postgres
+      - redis
 
   nginx:
     image: nginx
     deploy:
+      endpoint_mode: dnsrr
       labels:
         - "traefik.enable=true"
         - "traefik.docker.network=traefik_reverse_proxy"
-        - "traefik.docker.lbswarm=true"
         - "traefik.http.services.leseditionslunaires-nginx.loadbalancer.server.port=80"
         - "traefik.http.routers.leseditionslunaires-nginx.entryPoints=web"
         - "traefik.http.routers.leseditionslunaires-nginx.rule=Host(`leseditionslunaires.docker`) || Host(`www.leseditionslunaires.docker`)"
         - "traefik.http.routers.leseditionslunaires-nginx-https.entryPoints=websecure"
         - "traefik.http.routers.leseditionslunaires-nginx-https.rule=Host(`leseditionslunaires.docker`) || Host(`www.leseditionslunaires.docker`)"
         - "traefik.http.routers.leseditionslunaires-nginx-https.tls=true"
-        - "traefik.http.routers.leseditionslunaires-nginx-https.tls.certresolver=letsencrypt"
     configs:
       - source: nginx_conf
         target: /etc/nginx/conf.d/default.conf
@@ -43,17 +44,16 @@ services:
     volumes:
       - ../:/var/www/les_editions_lunaires:ro
     deploy:
+      endpoint_mode: dnsrr
       labels:
         - traefik.enable=true
         - traefik.docker.network=traefik_reverse_proxy
-        - traefik.docker.lbswarm=true
         - traefik.http.services.leseditionslunaires-static-nginx.loadbalancer.server.port=80
         - traefik.http.routers.leseditionslunaires-static-nginx.entryPoints=web
         - traefik.http.routers.leseditionslunaires-static-nginx.rule=Host(`leseditionslunaires.docker`) && PathPrefix(`/build/`,`/bundles/`,`/media/`,`/favicon.ico`) && Method(`GET`)
         - traefik.http.routers.leseditionslunaires-static-nginx-https.entrypoints=websecure
         - traefik.http.routers.leseditionslunaires-static-nginx-https.rule=Host(`leseditionslunaires.docker`) && PathPrefix(`/build/`,`/bundles/`,`/media/`,`/favicon.ico`) && Method(`GET`)
         - traefik.http.routers.leseditionslunaires-static-nginx-https.tls=true
-        - traefik.http.routers.leseditionslunaires-static-nginx-https.tls.certresolver=letsencrypt
     configs:
       - source: static_config
         target: /etc/nginx/conf.d/default.conf
@@ -61,21 +61,46 @@ services:
       - app
       - traefik_reverse_proxy
 
+  redis:
+    image: redis:7
+    volumes:
+      - redis_data:/data
+    networks:
+      - redis
+
+  redis-commander:
+    image: rediscommander/redis-commander
+    deploy:
+      endpoint_mode: dnsrr
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=traefik_reverse_proxy"
+        - "traefik.http.services.leseditionslunaires-redis-commander.loadbalancer.server.port=8081"
+        - "traefik.http.routers.leseditionslunaires-redis-commander.entryPoints=web"
+        - "traefik.http.routers.leseditionslunaires-redis-commander.rule=Host(`redis-commander.leseditionslunaires.docker`)"
+        - "traefik.http.routers.leseditionslunaires-redis-commander-https.entryPoints=websecure"
+        - "traefik.http.routers.leseditionslunaires-redis-commander-https.rule=Host(`redis-commander.leseditionslunaires.docker`)"
+        - "traefik.http.routers.leseditionslunaires-redis-commander-https.tls=true"
+    environment:
+      - REDIS_HOSTS=session:redis
+    networks:
+      - traefik_reverse_proxy
+      - redis
+
   adminer:
     image: adminer:latest
     deploy:
+      endpoint_mode: dnsrr
       labels:
         - traefik.enable=true
         - traefik.docker.network=traefik_reverse_proxy
-        - traefik.docker.lbswarm=true
         - traefik.http.services.leseditionslunaires-adminer.loadbalancer.server.port=8080
         - traefik.http.routers.leseditionslunaires-adminer.entryPoints=web
         - traefik.http.routers.leseditionslunaires-adminer.rule=Host(`adminer.leseditionslunaires.docker`)
         - traefik.http.routers.leseditionslunaires-adminer-https.entrypoints=websecure
         - traefik.http.routers.leseditionslunaires-adminer-https.rule=Host(`adminer.leseditionslunaires.docker`)
-        - traefik.http.routers.leseditionslunaires-adminer-https.tls.certresolver=letsencrypt
+        - traefik.http.routers.leseditionslunaires-adminer-https.tls=true
     volumes:
-      - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
       - postgres
@@ -84,7 +109,6 @@ services:
   database:
     image: postgres:15-alpine
     volumes:
-      - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
       - data:/var/lib/postgresql/data
     environment:
@@ -92,8 +116,48 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=toor
     networks:
-      - postgres
+      postgres:
+        aliases:
+            - postgres.leseditionslunaires.docker
 
+  minio:
+      image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+      command: ["server", "--console-address", ":9001", "/data"]
+      deploy:
+        endpoint_mode: dnsrr
+        labels:
+          - "traefik.enable=true"
+          - "traefik.docker.network=traefik_reverse_proxy"
+
+          # Web Interface
+          - "traefik.http.routers.leseditionslunaires-minio.entryPoints=web"
+          - "traefik.http.routers.leseditionslunaires-minio.rule=Host(`minio.leseditionslunaires.docker`)"
+          - "traefik.http.routers.leseditionslunaires-minio.service=leseditionslunaires-minio-svc"
+
+          - "traefik.http.routers.leseditionslunaires-minio-https.entryPoints=websecure"
+          - "traefik.http.routers.leseditionslunaires-minio-https.rule=Host(`minio.leseditionslunaires.docker`)"
+          - "traefik.http.routers.leseditionslunaires-minio-https.tls=true"
+          - "traefik.http.routers.leseditionslunaires-minio-https.service=leseditionslunaires-minio-svc"
+          - "traefik.http.services.leseditionslunaires-minio-svc.loadbalancer.server.port=9001"
+
+          # API (S3)
+          - "traefik.http.routers.leseditionslunaires-minio-api.entryPoints=websecure"
+          - "traefik.http.routers.leseditionslunaires-minio-api.rule=Host(`s3.minio.leseditionslunaires.docker`)"
+          - "traefik.http.routers.leseditionslunaires-minio-api.tls=true"
+          - "traefik.http.routers.leseditionslunaires-minio-api.service=leseditionslunaires-minio-api-svc"
+          - "traefik.http.services.leseditionslunaires-minio-api-svc.loadbalancer.server.port=9000"
+      volumes:
+        - /etc/localtime:/etc/localtime:ro
+        - minio_data:/data
+      environment:
+        - MINIO_ROOT_USER=root
+        - MINIO_ROOT_PASSWORD=toortoor
+        - MINIO_BROWSER_REDIRECT_URL=https://minio.leseditionslunaires.docker
+      networks:
+        minio:
+          aliases:
+            - minio.leseditionslunaires.docker
+        traefik_reverse_proxy: ~
 
 configs:
   nginx_conf:
@@ -106,9 +170,17 @@ configs:
 volumes:
   composer:
   data:
+  minio_data:
+  redis_data:
 
 networks:
   app:
+  redis:
+  minio:
+    driver: overlay
+    attachable: true
   postgres:
+    driver: overlay
+    attachable: true
   traefik_reverse_proxy:
     external: true

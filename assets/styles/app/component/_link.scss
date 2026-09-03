@@ -1,9 +1,17 @@
 .link {
-    &.link-secondary {
-        color: $color-lightblue;
+    &.link-highlight {
+        color: $color-text-main;
 
         &:hover {
-            color: $color-blue;
+            color: $color-text-accent;
+        }
+    }
+
+    &.link-secondary {
+        color: $color-text-accent;
+
+        &:hover {
+            color: $color-text-subtle;
 
             img {
                 filter: invert(72%) sepia(36%) saturate(526%) hue-rotate(170deg) brightness(101%) contrast(96%);

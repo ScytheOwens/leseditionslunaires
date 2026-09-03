@@ -2,53 +2,50 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CoreTrait;
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Category
 {
-    /**
-     * @var string|null
-     */
-    protected $id;
+    use CoreTrait;
 
-    /**
-     * @var string|null
-     */
-    protected $name;
+    #[ORM\Column]
+    #[Assert\NotBlank]
+    private ?string $name;
 
-    /**
-     * @var string|null
-     */
-    protected $description;
+    #[ORM\Column(unique: true)]
+    #[Assert\NotBlank]
+    private ?string $reference;
 
-    /**
-     * @var string|null
-     */
-    protected $slug;
+    #[ORM\Column(type: 'text')]
+    #[Assert\NotBlank]
+    private ?string $description;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
-    protected $createdAt;
+    #[ORM\Column(unique: true)]
+    #[Assert\NotBlank]
+    private ?string $slug;
 
-    /**
-     * @var \DateTimeInterface|null
-     */
-    protected $updatedAt;
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'children')]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    private ?Category $parent = null;
 
-    /**
-     * @var ArrayCollection<Product>
-     */
-    protected $products;
+    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'parent', cascade: ['persist', 'remove'])]
+    private Collection $children;
+
+    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'categories', cascade: ['persist'])]
+    private Collection $products;
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
-    }
+        $this->initializeCoreProperties();
 
-    public function getId(): ?string
-    {
-        return $this->id;
+        $this->children = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getName(): ?string
@@ -63,29 +60,105 @@ class Category
         return $this;
     }
 
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(?string $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription($description): ?self
+    public function setDescription($description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getParent(): ?Category
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?Category $category): self
+    {
+        $this->parent = $category;
+
+        return $this;
+    }
+
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function setChildren(array $children): self
+    {
+        $this->children = new ArrayCollection();
+
+        foreach ($children as $child) {
+            $this->addChild($child);
+        }
+
+        return $this;
+    }
+
+    public function addChild(Category $category): self
+    {
+        if (!$this->children->contains($category)) {
+            $this->children[] = $category;
+            $category->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild(Category $category): self
+    {
+        if ($this->children->contains($category)) {
+            $this->children->removeElement($category);
+        }
+
+        return $this;
+    }
+
     public function getProducts(): Collection
     {
         return $this->products;
     }
 
-    /**
-     * Add product.
-     */
+    public function setProducts(array $products): self
+    {
+        $this->products = new ArrayCollection();
+
+        foreach ($products as $product) {
+            $this->addProduct($product);
+        }
+
+        return $this;
+    }
+
     public function addProduct(Product $product): self
     {
         if (!$this->products->contains($product)) {
@@ -96,14 +169,10 @@ class Category
         return $this;
     }
 
-    /**
-     * Remove product.
-     */
     public function removeProduct(Product $product): self
     {
         if ($this->products->contains($product)) {
             $this->products->removeElement($product);
-            $product->removeCategory($this);
         }
 
         return $this;

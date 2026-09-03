@@ -1,0 +1,43 @@
+[
+    {
+        "name": "Science-fiction",
+        "reference": "SCF",
+        "description": "De l'anticipation à l'espace, explorez l'immensité des possibles.",
+        "slug": "science-fiction",
+        "children": [
+            {
+                "name": "Light SF",
+                "reference": "LSF",
+                "description": "Une science-fiction de l'intime et du décalage, où les spéculations technologiques ou scientifiques s'effacent au profit de l'exploration humaine, sociologique ou philosophique. La Light SF privilégie la finesse psychologique, l'ironie mordante ou la poésie du quotidien pour interroger notre rapport au futur. Une littérature d'anticipation subtile, centrée sur le sens plutôt que sur la machine.",
+                "slug": "light-sf"
+            }
+        ]
+    },
+    {
+        "name": "Fantastique",
+        "reference": "FAN",
+        "description": "Dans les interstices du quotidien : fantômes, monstres, merveilleux bousculent raison et réalité.",
+        "slug": "fantastique",
+        "children": [
+            {
+                "name": "Dark academia",
+                "reference": "DKA",
+                "description": "Au croisement du roman d'apprentissage et du drame psychologique, la Dark Academia explore l'obsession intellectuelle et les dérives de la passion érudite. Dans le cadre feutré d'institutions académiques aux architectures gothiques, ce genre dissèque les amitiés toxiques, la quête du beau et les secrets d'initiés. Une littérature de l'atmosphère, nourrie de références classiques, d'esthétisme suranné et d'une fascination sombre pour le savoir jusqu'à la rupture morale.",
+                "slug": "dark-academia"
+            },
+            {
+                "name": "Horreur",
+                "reference": "HOR",
+                "description": "Bien au-delà du simple effroi, la littérature d'horreur s'attache à sonder les zones d'ombre de la psyché et les failles de nos certitudes. Qu'elle soit existentielle, viscérale ou d'inspiration cosmique, elle dissèque nos angoisses fondamentales, la monstruosité ordinaire et la confrontation avec l'inconcevable. Une exploration littéraire de l'inquiétante étrangeté, où l'atmosphère et la tension psychologique révèlent les fêlures du réel.",
+                "slug": "horreur"
+            }
+        ]
+    },
+    {
+        "name": "Fantasy",
+        "reference": "FSY",
+        "description": "Des épopées légendaires aux cités mystérieuses, explorez l'imaginaire sans limites.",
+        "slug": "fantasy",
+        "children": []
+    }
+]
