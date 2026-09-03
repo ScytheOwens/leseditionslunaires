@@ -2,18 +2,20 @@
 $color-black: #17202A;
 $color-moon: #87CEFA;
 $color-night: #03224C;
-$color-lightblue: #EAF4FB;
 $color-silver: #B8C4D0;
 $color-ivory: #F7F4ED;
 $color-lightblue: #F0F8FF;
+$color-moonlight: #E8C15A;
 
 // Colors use case
+$color-background-accent: $color-moonlight;
 $color-background-main: $color-night;
 $color-background-surface: $color-lightblue;
+$color-background-subtle: $color-silver;
 
-$color-text-accent: $color-ivory;
+$color-text-accent: $color-moonlight;
 $color-text-main: $color-black;
-$color-text-subtle: $color-silver;
+$color-text-subtle: $color-ivory;
 
 $color-border-accent: $color-moon;
 $color-border-main: $color-black;
@@ -29,6 +31,20 @@ $font-size-xl: 2rem;
 // Font weight
 $font-weight-regular: 400;
 $font-weight-semibold: 600;
+
+// Font family
+$font-primary: 'Cinzel';
+$font-secondary: 'Open Sans';
+
+@font-face {
+    font-family: $font-primary;
+    src: url("../fonts/Cinzel/Cinzel-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: $font-secondary;
+    src: url("../fonts/Open_Sans/OpenSans-VariableFont_wdth,wght.ttf") format("truetype");
+}
 
 // Media queries
 $desktop: 1444;

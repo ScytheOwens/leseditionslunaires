@@ -4,14 +4,14 @@
 {% for category in product.categories %}
     {% set details = details|merge([{
         'name': category.name,
-        'link': ''
+        'link': '/'
     }]) %}
 {% endfor %}
 
 {% for variant in product.productVariants %}
     {% set options = options|merge([{
         'name': variant.name,
-        'link': '',
+        'link': '/',
         'price': (variant.computePrice * 0.01)|format_currency('EUR', {}, 'fr')
     }]) %}
 {% endfor %}

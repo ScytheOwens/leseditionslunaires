@@ -1,4 +1,12 @@
 .link {
+    &.link-highlight {
+        color: $color-text-main;
+
+        &:hover {
+            color: $color-text-accent;
+        }
+    }
+
     &.link-secondary {
         color: $color-text-accent;
 

@@ -1,0 +1,24 @@
+.button {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px 0 #00000066;
+    display: block;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    transition: all 500ms ease;
+
+    &.button-highlight {
+        background-color: $color-background-subtle;
+        border: 2px solid $color-border-subtle;
+        color: $color-text-main;
+    }
+
+    &.button-ghost {
+        backdrop-filter: blur(2px);
+        border: 2px solid $color-border-accent;
+    }
+
+    &:hover {
+        box-shadow: 0 0 20px 5px rgba($color-text-main, 0.2);
+        filter: sepia(0.2);
+    }
+}
