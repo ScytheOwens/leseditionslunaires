@@ -7,6 +7,15 @@
         }
     }
 
+    &.link-subtle {
+        color: $color-text-subtle;
+
+        &:hover {
+            color: lighten($color-text-accent, 15%);
+            text-decoration: underline;
+        }
+    }
+
     &.link-secondary {
         color: $color-text-accent;
 

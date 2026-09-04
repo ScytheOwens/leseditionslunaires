@@ -8,6 +8,10 @@
 {% endblock %}
 
 {% block main %}
+    {% include "component/_breadcrumbs.html.twig" with {
+        'breadcrumbs': breadcrumbs
+    } %}
+
     {% include "widget/_widget_header.html.twig" with {
         'page_title': 'Nos parutions, une littérature de l\'imaginaire',
         'page_description': 'Découvrez des récits SFFF centrés sur la psychologie des personnages et la complexité des relations humaines. Explorations amorales, intrigues organiques, et proses travaillées, vibrez dans notre univers.'

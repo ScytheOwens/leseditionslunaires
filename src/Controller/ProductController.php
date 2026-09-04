@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 #[Route('/', name: 'product_')]
 class ProductController extends AbstractController
@@ -23,6 +24,7 @@ class ProductController extends AbstractController
 
         return $this->render('product/list.html.twig', [
             'categories' => $categories,
+            'breadcrumbs' => $this->getBreadcrumbs(),
         ]);
     }
 
@@ -38,6 +40,7 @@ class ProductController extends AbstractController
         return $this->render('product/show.html.twig', [
             'product' => $product,
             'tabs' => $this->getTabs($product),
+            'breadcrumbs' => $this->getBreadcrumbs($product),
         ]);
     }
 
@@ -113,5 +116,24 @@ class ProductController extends AbstractController
         }
 
         return $builtTabs;
+    }
+
+    private function getBreadcrumbs(?Product $product = null): array
+    {
+        $breadcrumbs = [
+            [
+                'link' => $this->generateUrl('app_product_list', [], UrlGeneratorInterface::ABSOLUTE_URL),
+                'label' => 'Catalogue',
+            ],
+        ];
+
+        if (null !== $product) {
+            $breadcrumbs[] = [
+                'link' => $this->generateUrl('app_product_show', ['slug' => $product->getSlug()], UrlGeneratorInterface::ABSOLUTE_URL),
+                'label' => $product->getName(),
+            ];
+        }
+
+        return $breadcrumbs;
     }
 }
