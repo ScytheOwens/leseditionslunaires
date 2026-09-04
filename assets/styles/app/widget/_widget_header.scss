@@ -1,12 +1,13 @@
 .widget-header {
-    color: $color-text-accent;
 
     .widget-header-title {
+        color: $color-text-accent;
+        font-family: $font-primary;
         font-size: $font-size-xl;
     }
 
     .widget-header-description {
-        font-size: $font-size-l;
-        padding: 1rem 1.5rem;
+        color: $color-text-subtle;
+        font-size: $font-size-m;
     }
 }

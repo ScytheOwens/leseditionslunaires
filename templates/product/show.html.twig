@@ -8,6 +8,10 @@
 {% endblock %}
 
 {% block main %}
+    {% include "component/_breadcrumbs.html.twig" with {
+        'breadcrumbs': breadcrumbs
+    } %}
+
     {% include "wrapper/product/_widget_presentation.html.twig" with {
         'product': product
     } %}

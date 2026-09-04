@@ -1,11 +1,18 @@
 .widget-display {
     background-color: $color-background-surface;
     border-radius: 1rem;
+    box-shadow: 0 4px 12px 0 #00000066;
     margin-top: 1.5rem;
     padding: 1rem 2rem;
-    width: 80%;
 
-    &:nth-child(even of .widget-display) {
-        margin-left: auto;
+    .widget-display-title {
+        font-family: $font-primary;
+        font-size: $font-size-l;
+    }
+
+    .widget-display-content {
+        display: flex;
+        gap: 2.5rem;
+        margin: 1.5rem 0 0 0;
     }
 }

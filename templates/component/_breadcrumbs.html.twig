@@ -1,0 +1,6 @@
+<ul class="component-breadcrumbs" aria-label="Breadcrumb">
+    <li class="component-breadcrumbs-item"><a href="{{ url('app_home_index') }}" class="link link-subtle"><i class="fa fa-home"></i></a></li>
+    {% for breadcrumb in breadcrumbs %}
+        <li class="component-breadcrumbs-item"><a href="{{ breadcrumb.link }}" class="link link-subtle">{{ breadcrumb.label }}</a></li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,14 @@
+<section class="widget-dropdown"{% if id is defined and id is not null and id is not empty %} id="{{ id }}"{% endif %}>
+    <div class="content-container">
+        <h2 class="widget-dropdown-title">{{ title }}</h2>
+        <ul class="widget-dropdown-list">
+            {% for item in items %}
+                <li class="widget-dropdown-list-item">
+                    <input type="checkbox" class="widget-dropdown-list-item-checkbox" id="dropdown-{% if id is defined and id is not null and id is not empty %}{{ id }}{% else %}{{ title|slug }}{% endif %}-{{ loop.index }}"/>
+                    <label for="dropdown-{% if id is defined and id is not null and id is not empty %}{{ id }}{% else %}{{ title|slug }}{% endif %}-{{ loop.index }}" class="widget-dropdown-list-item-label">{{ item.label }}</label>
+                    <div class="widget-dropdown-list-item-content">{{ item.description|raw }}</div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>

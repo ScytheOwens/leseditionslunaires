@@ -1,0 +1,16 @@
+.component-breadcrumbs {
+    display: flex;
+    font-size: $font-size-s;
+    gap: 0.5rem;
+    padding: 0 0 1rem 0;
+
+    .component-breadcrumbs-item {
+        &:not(:last-child) {
+            &::after {
+                color: $color-text-subtle;
+                content: '>';
+                margin-left: 0.5rem;
+            }
+        }
+    }
+}

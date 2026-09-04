@@ -1,0 +1,13 @@
+{% embed "widget/_widget_display.html.twig" with {
+    'title': title|default('')
+} %}
+    {% block items %}
+        {% for product in products %}
+            <li class="widget-display-content-item">
+                {% include "widget/_widget_product.html.twig" with {
+                    'product': product
+                } %}
+            </li>
+        {% endfor %}
+    {% endblock %}
+{% endembed %}
