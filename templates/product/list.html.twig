@@ -26,4 +26,43 @@
             } %}
         {% endif %}
     {% endfor %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': 'Notre ligne éditoriale',
+        'content': [
+            {
+                'content': 'Les Éditions Lunaires proposent une exploration exigeante de la littérature de l’imaginaire. À la croisée de la fantasy psychologique, du fantastique et de la science-fiction, notre catalogue met à l\'honneur des histoires où la trajectoire des personnages, la complexité de leurs relations et la finesse de l\'écriture occupent une place centrale. Nous concevons chaque roman comme un huis clos émotionnel ou une immersion intime, où la construction de l\'univers vient enrichir les doutes, les dilemmes et les failles de nos protagonistes.'
+            },
+            {
+                'content': 'Que vous soyez adepte de récits sombres, de noeuds relationnels ou de drames intimes, nous apportons un soin particulier à la prose pour offrir des œuvres captivantes et durables.'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_text.html.twig" with {
+        'title': 'Nos sous-genre et thématiques',
+        'content': [
+            {
+                'content': 'Nous affectionnons en particulier les genres de l\'imaginaire lorsqu\'ils révèlent les aspects les plus profonds de l\'humanité. Alors que nous publiions de la Dark Academia, de l\'horreur, de l\'anticipation, de la dystopie, ou de la high fantasy, nous cherchons ce qui n\'a pas encore été dit.'
+            }
+        ]
+    } %}
+
+    {% include "widget/_widget_dropdown.html.twig" with {
+        'title': 'Foire aux questions',
+        'items': [
+            {
+                'label': 'Sous quels formats puis-je lire les romans des Éditions Lunaires ?',
+                'description': 'Nos titres sont déclinés en version papier (broché) et en formats numériques (ePub et Kindle) compatibles avec l\'ensemble des liseuses et applications de lecture.'
+            },
+            {
+                'label': 'Où acheter nos livres ?',
+                'description': 'Vous pouvez passer commande directement sur notre boutique en ligne, ou sur Amazon.'
+            },
+            {
+                'label': 'Comment découvrir l\'univers d\'un livre avant de commander ?',
+                'description': 'Chaque fiche produit de notre catalogue vous permet de consulter un résumé détaillé et de lire un extrait gratuit pour vous immerger dans le style de l\'auteur.'
+            }
+        ]
+    } %}
 {% endblock %}
