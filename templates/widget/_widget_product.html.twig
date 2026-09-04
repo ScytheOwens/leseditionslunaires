@@ -1,0 +1,13 @@
+<a href="{{ url('app_product_show', { slug: product.slug }) }}" class="widget-product">
+    <img src="{{ guess_medium(product.mainVariant.media, 'cover').url }}" alt="Couverture de {{ product.name }}" class="widget-product-medium"/>
+    <div class="widget-product-content">
+        <h3 class="widget-product-content-title">{{ product.name }}</h3>
+        <p class="widget-product-content-date">Publié le {{ product.releasedOn|format_date('medium', locale: 'fr') }}</p>
+        {# <ul class="widget-product-content-list">
+            {% for tag in product.tags %}
+                <li class="widget-product-content-list-item tag tag-{{ tag.namespace.value }}">{{ tag.name }}</li>
+            {% endfor %}
+        </ul> #}
+        <p class="widget-product-content-description">{{ product.description }}</p>
+    </div>
+</a>

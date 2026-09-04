@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,10 +19,10 @@ class ProductController extends AbstractController
     #[Route('/catalogue', name: 'list')]
     public function list(): Response
     {
-        $products = $this->em->getRepository(Product::class)->findAll();
+        $categories = $this->em->getRepository(Category::class)->findBy(['parent' => null]);
 
         return $this->render('product/list.html.twig', [
-            'products' => $products,
+            'categories' => $categories,
         ]);
     }
 
